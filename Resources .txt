@@ -1,0 +1,11 @@
+(L293d Chip- Motor controller)https://www.google.com/search?q=l293d+chip&rlz=1C1GCEA_enUS771US771&oq=L293d&aqs=chrome.1.69i57j0l5.4832j0j7&sourceid=chrome&ie=UTF-8
+(Temp controlled dc fan)https://www.electronicshub.org/temperature-controlled-dc-fan-using-microcontroller/
+(how to program atmega32u4)https://www.google.com/search?q=how+to+program+atmega32u4&rlz=1C1GCEA_enUS771US771&oq=how+to+program+ATMega32U4&aqs=chrome.0.0l2.6156j0j4&sourceid=chrome&ie=UTF-8
+(AVR tutorial ):http://www.ladyada.net/learn/avr/avrdude.html
+(SMT Breakout PCB for 44-QFN or 44-TQFP - 3 Pack!):https://www.adafruit.com/product/1162?gclid=Cj0KCQjwuuHdBRCvARIsAELQRQHmrp4E0w3bsRaYd70G3gUbu6jA2ij9G5lFExl_cdrl2C0cqgcD7RcaApKrEALw_wcB
+(INSTALLING ARDUINO BOOTLOADER ON AN ATMEGA32U4):https://electronut.in/bootloader-atmega32u4/
+(Atmel ATmega32U4 (Arduino Leonardo) Breakout Board):http://fr.hobbytronics.co.uk/atmega32u4-arduino-breakout
+(ATmega16U4/32U4 Datasheet):https://www.pjrc.com/teensy/atmega32u4.pdf
+(Using ATmega32u4 In A Circuit):https://www.build-electronic-circuits.com/usb-circuit/
+
+
