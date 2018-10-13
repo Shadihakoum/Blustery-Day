@@ -8,4 +8,6 @@
 (ATmega16U4/32U4 Datasheet):https://www.pjrc.com/teensy/atmega32u4.pdf
 (Using ATmega32u4 In A Circuit):https://www.build-electronic-circuits.com/usb-circuit/
 
+Hardware info
+(LM35) https://www.maxphi.com/lm35-temperature-sensor-arduino-project
 
