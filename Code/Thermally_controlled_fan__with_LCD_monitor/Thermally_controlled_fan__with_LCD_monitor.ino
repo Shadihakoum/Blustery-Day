@@ -146,6 +146,4 @@ else
 // Update state of the Unit button
 Unit_Btn_LastState = Unit_Btn_State;
 
-
-
 }
