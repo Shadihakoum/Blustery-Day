@@ -36,6 +36,9 @@ int Set_Temp = 23;
 // Sets the initial temperature units to C
 char units = 'C';
 
+// create a character variable for outputing temperature to LCD screen
+char[9] LCD_Output = 'p';
+
 void setup() {
 // Setup serial port to opperate at 9600 bits per second
 Serial.begin(9600);
@@ -106,17 +109,35 @@ if (Unit_Btn_State == HIGH)
 {
   // Sets the temperature unit as  degrees F
   units = 'F';
+
+  // Convert threshold and sensor temperature to degrees F
   Set_Temp_F = (Set_Temp * (9/5)) + 32;
+  Convert_Temp_F = (Convert_Temp * (9/5)) + 32; 
   
-  // Set the Cursor loaction of the LCD
+  // Set the Cursor loaction of the LCD for room temperature 
   lcd.setCursor(0, 1);
 
-  // Print The Temperature to the LCD
-  lcd.print(Set_Temp_F)
+  // Create message to be printed to LCD
+  sprintf(LCD_Output, "%3d %3d char(223)%c", Convert_Temp_F, Set_Temp_F, units);
+
+  // Print Temperatures to LCD
+  lcd.print(LCD_Output);
+  
 }
 else
 {
+  // sets the temperature unit as degrees C
   units = 'C';
+
+  // Set the Cursor loaction of the LCD for room temperature 
+  lcd.setCursor(0, 1);
+
+  // Create message to be printed to LCD
+  sprintf(LCD_Output, "%3d %3d char(223)%c", Convert_Temp, Set_Temp, units);
+
+  // Print Temperatures to LCD
+  lcd.print(LCD_Output);  
+  
 }
   
   // Delay, to help prevent bouncing
