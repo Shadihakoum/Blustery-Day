@@ -40,8 +40,8 @@ char units = 'C';
 char[9] LCD_Output = 'p';
 
 void setup() {
-// Setup serial port to opperate at 9600 bits per second
-Serial.begin(9600);
+// Setup serial port to opperate at 19200 bits per second
+Serial.begin(19200);
 
 // Initialize input pins 41, 8,1 
 pinMode(Temp_Sensor, INPUT) ; 
