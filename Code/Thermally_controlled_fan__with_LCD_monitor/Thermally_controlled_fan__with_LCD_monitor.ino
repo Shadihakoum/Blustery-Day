@@ -10,7 +10,7 @@ const int Temp_Sensor = 41;
 // Sets the input pin to increase or decrease the threshold temperature and change unit 
 const int Dwn_Btn_pin = 36;
 const int Up_Btn_pin = 37;
-const int Unit_Btn_Pin = 38
+const int Unit_Btn_Pin = 38;
 
 // Sets output pins for fan and LCD, and initialize LCD pins
 const int Fan_Control = 31;
@@ -23,11 +23,11 @@ const int d7 = 30;
 LiquidCrystal lcd(rs,en,d4,d5,d6);
 
 // Initialize user interface
-int Dwn_Btn_State = 0
-int Up_Btn_State = 0
-int Unit_Btn_State = 0
-int Dwn_Btn_LastState = 0
-int Up_Btn_LastState = 0
+int Dwn_Btn_State = 0;
+int Up_Btn_State = 0;
+int Unit_Btn_State = 0;
+int Dwn_Btn_LastState = 0;
+int Up_Btn_LastState = 0;
 int Unit_Btn_LastState = 0;
 
 // Sets the intial threshold value to 23 degrees C
@@ -61,10 +61,10 @@ pinMode(Fan_Control, OUTPUT);
 //pinMode(LCD_7, OUTPUT);
 
 // Set the LCD's number of columns and rows
-lcd.begin(, 2)
+lcd.begin(16, 2);
 
 // Prints the, constant, header of the LCD
-lcd.print("Temp. Set Temp.")
+lcd.print("Temp. Set Temp.");
 
 }
 
@@ -73,7 +73,7 @@ void loop() {
 uint16_t  Temp = analogRead(Temp_Sensor);
 
 // Mapping output voltage from temperature sensor to corresponding temperature in degrees C 
-Convert_Temp = map(Temp_Sensor, -490, 1500, -55, 150)
+Convert_Temp = map(Temp_Sensor, -490, 1500, -55, 150);
   
 // read the input pin for user buttons
 Dwn_Btn_State = digitalRead(Dwn_Btn_Pin);
