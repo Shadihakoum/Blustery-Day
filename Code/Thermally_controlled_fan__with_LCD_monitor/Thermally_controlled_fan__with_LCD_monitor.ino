@@ -113,7 +113,15 @@
 
   // Convert threshold and sensor temperature to degrees F
     Set_Temp_F = (Set_Temp * (9/5)) + 32;
-    Convert_Temp_F = (Convert_Temp * (9/5)) + 32; 
+    Convert_Temp_F = (Convert_Temp * (9/5)) + 32;
+
+  // Check the temperature and turn the fan off or on
+     if (Convert_Temp_F >= 73){
+      digitalWrite(Fan_Control, HIGH); 
+     }
+     else{
+      digitalWrite(Fan_Control, LOW);
+     }
   
   // Set the Cursor loaction of the LCD for room temperature 
     lcd.setCursor(0, 1);
@@ -130,6 +138,14 @@
   else{
   // sets the temperature unit as degrees C
     units = 'C';
+
+  // Check the temperature and turn the fan off or on
+     if (Convert_Temp >= 23){
+      digitalWrite(Fan_Control, HIGH); 
+     }
+     else{
+      digitalWrite(Fan_Control, LOW);
+     }
 
   // Set the Cursor loaction of the LCD for room temperature 
     lcd.setCursor(0, 1);
