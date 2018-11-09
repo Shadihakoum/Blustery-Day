@@ -5,21 +5,21 @@
 #include <SPI.h>
 
 // Sets the pin number for the sensor at analog pin 41.
-  const int Temp_Sensor = 41;
+  const int Temp_Sensor = A5; // Pin 41 on chip
 
 // Sets the input pin to increase or decrease the threshold temperature and change unit 
-  const int Dwn_Btn_Pin = 36;
-  const int Up_Btn_Pin = 37;
-  const int Unit_Btn_Pin = 38;
+  const int Dwn_Btn_Pin = 2; // Pin 19 on chip;
+  const int Up_Btn_Pin = 0; // Pin 20 on chip;
+  const int Unit_Btn_Pin = 1; // Pin 21 on chip;
 
 // Sets output pins for fan and LCD, and initialize LCD pins
-  const int Fan_Control = 31;
-  const int rs = 25;
-  const int en = 26;
-  const int d4 = 27;
-  const int d5 = 28;
-  const int d6 = 29;
-  const int d7 = 30;
+  const int Fan_Control = 5; // Pin 31 on chip
+  const int rs = 4; // Pin 25 on chip
+  const int en = 12; // Pin 26 on chip
+  const int d4 = 6; // Pin 27 on chip
+  const int d5 = 8; // Pin 28 on chip
+  const int d6 = 9; // Pin 29 on chip
+  const int d7 = 10; // Pin 30 on chip
   LiquidCrystal lcd(rs,en,d4,d5,d6,d7);
 
 // Initialize user interface
@@ -53,7 +53,7 @@
   pinMode(Up_Btn_Pin, INPUT);
   pinMode(Unit_Btn_Pin, INPUT);
 
-// Initialize fan output pin
+// Initialize fan control pin
   pinMode(Fan_Control, OUTPUT);
 //pinMode(LCD_0, OUTPUT);
 //pinMode(LCD_1, OUTPUT);
@@ -160,4 +160,3 @@
   // Delay, to help prevent bouncing
   delay(50);
 }
-
