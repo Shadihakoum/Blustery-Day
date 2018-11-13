@@ -28,7 +28,7 @@
   int Unit_Btn_State = 0;
   int Dwn_Btn_LastState = 0;
   int Up_Btn_LastState = 0;
-  int Unit_Btn_LastState = 0;
+  int Last_Unit_Btn_State = 0;
 
 // Sets the intial threshold value to 23 degrees C
   int Set_Temp = 23;
@@ -44,8 +44,8 @@
   int Convert_Temp_F = 0;
 
   void setup() {
-// Setup serial port to opperate at 19200 bits per second
-  Serial.begin(19200);
+// Setup serial port to opperate at 9600 bits per second
+  Serial.begin(9600);
 
 // Initialize input pins 41, 8,1 
   pinMode(Temp_Sensor, INPUT) ; 
@@ -88,9 +88,6 @@
   if (Dwn_Btn_State != Dwn_Btn_LastState){
   // Decrement set temp.
     Set_Temp--;
-
-  // Delay, to help prevent bouncing
-    delay(50);
   }
 // Update state of Dwn Btn
   Dwn_Btn_LastState = Dwn_Btn_State;
@@ -99,15 +96,13 @@
   if (Up_Btn_State != Up_Btn_LastState){
   // Increment set temp
     Set_Temp++;
-
-  // Delay, to help prevent bouncing
-    delay(50);
   }
 // Udate state of Up Btn
   Up_Btn_LastState = Up_Btn_State;
 
 // Check if the value is high or low
-  if (Unit_Btn_State == HIGH){
+  if (Unit_Btn_State == LOW){
+    if(Unit_Btn_State != Last_Unit_Btn_State){
   // Sets the temperature unit as  degrees F
     units = 'F';
 
@@ -132,8 +127,8 @@
   // Print Temperatures to LCD
     lcd.print(LCD_Output);
 
-  // Delay, to help prevent bouncing
-    delay(50);
+  // Sets current and last state equal for futur use 
+     Last_Unit_Btn_State = Unit_Btn_State;
   }
   else{
   // sets the temperature unit as degrees C
@@ -156,7 +151,5 @@
   // Print Temperatures to LCD
     lcd.print(LCD_Output);  
   }
-  
-  // Delay, to help prevent bouncing
-  delay(50);
+  }
 }
