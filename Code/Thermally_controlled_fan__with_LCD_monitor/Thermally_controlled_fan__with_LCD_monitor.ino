@@ -25,12 +25,13 @@ const int led = 13; // Pin 32 on chip.
   LiquidCrystal lcd(rs,en,d4,d5,d6,d7);
 
 // Initialize user interface
-  int Dwn_Btn_State = 0;
-  int Up_Btn_State = 0;
-  int Unit_Btn_State = 0;
+  bool Dwn_Btn_State = 0;
+  bool Up_Btn_State = 0;
+  bool Unit_Btn_State = 0;
   int Dwn_Btn_LastState = 0;
   int Up_Btn_LastState = 0;
   int Last_Unit_Btn_State = 0;
+  int Current_Btn_State = 0;
 
 // Initializes the variable temperature, to store the analog temperature from the sensor
   int Temperature;
@@ -61,14 +62,6 @@ const int led = 13; // Pin 32 on chip.
 // Initialize fan control pin and test led
   pinMode(Fan_Control, OUTPUT);
   pinMode(led, OUTPUT);
-//pinMode(LCD_0, OUTPUT);
-//pinMode(LCD_1, OUTPUT);
-//pinMode(LCD_2, OUTPUT);
-//pinMode(LCD_3, OUTPUT);
-//pinMode(LCD_4, OUTPUT);
-//pinMode(LCD_5, OUTPUT);
-//pinMode(LCD_6, OUTPUT);
-//pinMode(LCD_7, OUTPUT);
 
 // Set the LCD's number of columns and rows
   lcd.begin(16, 2);
@@ -81,7 +74,7 @@ const int led = 13; // Pin 32 on chip.
   void loop() {
 // read the value from the sensor at pin 41 and store as a 16bit integer 
   Temperature = analogRead(Temp_Sensor);
-  Temperature = Temperature/2 - 13;
+  Temperature = (5.0*Temperature*1000.0)/(1024*10);
   
 // Mapping output voltage from temperature sensor to corresponding temperature in degrees C 
   //int Convert_Temp = map(Temperature, -490, 1500, -55, 150);
@@ -95,6 +88,7 @@ const int led = 13; // Pin 32 on chip.
   if (Dwn_Btn_State == HIGH){
   // Decrement set temp.
     Set_Temp = Set_Temp - 1;
+    delay(50);
   }
 
 // Check if user has pressed the up button
@@ -104,17 +98,25 @@ const int led = 13; // Pin 32 on chip.
   }
   
 // Check if the user wantes degrees F or C
-  if (Unit_Btn_State == HIGH){
-    if(Unit_Btn_State != Last_Unit_Btn_State){
+  if (Unit_Btn_State == HIGH && units == 'F'){
   // Sets the temperature unit as  degrees F
+    units = 'C';
+    delay(150);
+    }
+    else if (Unit_Btn_State == HIGH && units == 'C'){
+       // sets the temperature unit as degrees C
     units = 'F';
+      // Sets current and last state equal for futur use 
+    delay(150);
+    }
+    else {
+      units = units;
+    }
 
-    digitalWrite(led, HIGH);
-
+  if(units == 'F' || units == 'f'){
   // Convert threshold and sensor temperature to degrees F
-    Set_Temp_F = (Set_Temp * (9/5)) + 32;
-  //  Convert_Temp_F = (Convert_Temp * (9/5)) + 32;
-  Convert_Temp_F = (Temperature * (9/5)) + 32;
+    Set_Temp_F = (Set_Temp * 9/5) + 32;
+  Convert_Temp_F = (Temperature * 9/5) + 32;
 
   // Check the temperature and turn the fan off or on
      if (Convert_Temp_F >= Set_Temp_F){
@@ -132,17 +134,9 @@ const int led = 13; // Pin 32 on chip.
 
   // Print Temperatures to LCD
     lcd.print(LCD_Output);
-
-  // Sets current and last state equal for futur use 
-     Last_Unit_Btn_State = Unit_Btn_State;
-
     }
     else{
-  // sets the temperature unit as degrees C
-    units = 'C';
-    
   // Check the temperature and turn the fan off or on
-  //  if (Convert_Temp >= Set_Temp){
       if (Temperature >= Set_Temp){
       digitalWrite(Fan_Control, HIGH); 
      }
@@ -152,17 +146,16 @@ const int led = 13; // Pin 32 on chip.
 
   // Set the Cursor loaction of the LCD for room temperature 
     lcd.setCursor(0, 1);
-
-  // Create message to be printed to LCD
-  // sprintf(LCD_Output, "%3d %c    %3d %c", Convert_Temp,units, Set_Temp, units);
-  sprintf(LCD_Output, "%3d %c    %3d %c", Temperature, units, Set_Temp, units);
+    // Create message to be printed to LCD  
+    sprintf(LCD_Output, "%3d %c    %3d %c", Temperature, units, Set_Temp, units);
 
   // Print Temperatures to LCD
     lcd.print(LCD_Output);
-
-  // Sets current and last state equal for futur use 
-    Last_Unit_Btn_State = Unit_Btn_State + 1;
     }
-    delay(2000);
-  }
+
+    delay(150);
+//    Serial.println('S');
+//    Serial.println(Unit_Btn_State);
+//    Serial.println('L');
+//    Serial.println(Last_Unit_Btn_State);
 }
